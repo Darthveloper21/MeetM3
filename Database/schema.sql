@@ -1,0 +1,182 @@
+DROP SCHEMA IF EXISTS petclinic;
+CREATE SCHEMA IF NOT EXISTS petclinic;
+use petclinic;
+
+DROP TABLE IF EXISTS `doctors`;
+CREATE TABLE `doctors` (
+  `doctorID` varchar(10) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `lname` varchar(50) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `phone_number` varchar(10) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`doctorID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `doctors` (`doctorID`, `fname`, `lname`, `date_of_birth`, `phone_number`, `email`) VALUES 
+('1077','Elbert','Wuckert','1973-03-07','(247)045-6','little.dianna@example.com'),
+('4047','Christ','Braun','1985-03-07','(622)053-5','kaleigh05@example.com'),
+('4123','Berenice','Barrows','1980-04-07','820.957.85','qschowalter@example.org'),
+('5341','Jeramy','Dickens','1978-07-30','1-175-310-','tyshawn.hermann@example.net'),
+('8150','Clementina','Harber','1979-11-24','0142477431','isipes@example.org');
+
+DROP TABLE IF EXISTS `owners`;
+CREATE TABLE `owners` (
+  `SSN` varchar(10) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `lname` varchar(50) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `phone_number` varchar(10) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`SSN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `owners` (`SSN`, `fname`, `lname`, `date_of_birth`, `phone_number`, `email`) VALUES 
+('02328325','Isaias','Kessler','1975-10-03','1-280-093-','lang.lina@yahoo.com'),
+('04266345','Raheem','Kuhlman','1976-10-21','311.310.26','jess46@hotmail.com'),
+('10986568','Moises','Kris','1981-06-25','818.062.79','labadie.emely@hotmail.com'),
+('17596452','Mathilde','Murphy','1984-05-23','034-215-60','roberta.block@gmail.com'),
+('19305913','Noemy','Leffler','2018-10-23','1-469-931-','frederic51@yahoo.com'),
+('20297757','Martina','Spinka','2020-06-06','1-226-629-','grenner@yahoo.com'),
+('23275549','Harry','Stokes','2013-10-12','168-090-99','kessler.matilda@gmail.com'),
+('25110201','Erling','Mante','1972-03-12','640.210.46','felicity.koss@yahoo.com'),
+('28417213','Isadore','Bogisich','1981-06-20','1-629-184-','yundt.isabelle@gmail.com'),
+('29800890','Kade','Ratke','2004-02-21','028.195.87','zbrakus@hotmail.com'),
+('29919208','Terrill','Ward','1980-05-30','+83(0)9315','wallace37@hotmail.com'),
+('30429965','Morgan','Aufderhar','2008-10-21','(749)319-9','kilback.orlo@hotmail.com'),
+('33663740','Cindy','Murray','2008-03-25','(614)831-8','hermann.ansel@gmail.com'),
+('37644865','Glenda','Bosco','2020-08-15','1-855-277-','laurine16@gmail.com'),
+('38140225','Dashawn','Ortiz','2006-05-20','(879)905-8','llindgren@hotmail.com'),
+('44486101','Arden','Prosacco','2011-07-14','217-180-46','iheaney@gmail.com'),
+('46228097','Cordia','Stoltenberg','1982-11-05','(856)069-5','wdubuque@gmail.com'),
+('50706985','Mark','Glover','2011-10-20','(483)161-2','justina40@gmail.com'),
+('54053967','Crystel','Rath','2011-05-02','238-313-84','hayden64@yahoo.com'),
+('56182137','Mohamed','Thiel','2002-12-07','1-929-105-','kendall.abbott@gmail.com'),
+('57063930','Eileen','Kunde','1989-10-11','1-358-055-','oroob@yahoo.com'),
+('58058856','Mathew','Effertz','1978-11-17','0005495581','lauryn.wisozk@yahoo.com'),
+('60633254','Ronny','Beahan','2010-01-11','(646)353-1','yolanda44@gmail.com'),
+('63569092','Jarod','Schiller','1987-12-21','698.384.61','wfahey@yahoo.com'),
+('64993129','Agnes','Wilderman','1985-03-14','(458)536-6','kunde.casper@gmail.com'),
+('67147998','Matilde','Kuvalis','1981-03-22','1-090-276-','keebler.yoshiko@yahoo.com'),
+('73870891','Marisol','Oberbrunner','1994-04-11','525.953.46','wiza.torrance@hotmail.com'),
+('85129598','Jarred','Batz','2006-03-09','322-910-73','yundt.marcel@gmail.com'),
+('92878106','Dario','Harber','1984-03-16','(555)868-0','wuckert.lorna@hotmail.com'),
+('99841161','Kiera','Roberts','1979-12-04','711-711-91','dberge@hotmail.com');
+
+DROP TABLE IF EXISTS `pets`;
+CREATE TABLE `pets` (
+  `petID` varchar(20) NOT NULL,
+  `pet_name` varchar(50) NOT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `pet_type` char(20) NOT NULL,
+  `owner_SSN` varchar(10) NOT NULL,
+  PRIMARY KEY (`petID`),
+  KEY `feedme` (`owner_SSN`),
+  CONSTRAINT `feedme` FOREIGN KEY (`owner_SSN`) REFERENCES `owners` (`SSN`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `pets` (`petID`, `pet_name`, `date_of_birth`, `pet_type`, `owner_SSN`) VALUES 
+('0416','Kristy','2016-07-30','bird','02328325'),
+('0433','Izabella','2017-05-17','cat','37644865'),
+('0480','Jovan','2016-10-17','hamster','46228097'),
+('0900','Dessie','2012-09-17','tortoise','50706985'),
+('0983','Percy','2013-10-12','cat','60633254'),
+('1035','Marilyne','2020-08-23','cat','67147998'),
+('1071','Jaeden','2015-05-12','tortoise','73870891'),
+('1960','Montana','2013-08-01','tortoise','85129598'),
+('2260','Esteban','2014-02-22','dog','92878106'),
+('2448','Valerie','2020-10-26','dog','99841161'),
+('2479','Tess','2014-06-02','bird','19305913'),
+('2777','Keyon','2011-09-06','bird','54053967'),
+('2969','Tito','2014-07-01','dog','85129598'),
+('3659','Alan','2016-02-22','cat','67147998'),
+('4009','Libby','2017-04-04','dog','64993129'),
+('4507','Belle','2012-05-08','pig','17596452'),
+('4599','Dana','2019-08-16','cat','28417213'),
+('5017','Porter','2018-06-23','cat','04266345'),
+('5128','Immanuel','2012-09-29','bird','20297757'),
+('5310','Jesse','2011-06-04','cat','10986568'),
+('5355','Henderson','2017-07-17','dog','19305913'),
+('5391','Jayda','2018-07-31','cat','25110201'),
+('5405','Lindsey','2017-07-04','dog','23275549'),
+('5642','Kathlyn','2012-08-02','hamster','29800890'),
+('5734','Weston','2013-05-15','dog','38140225'),
+('5800','Briana','2018-01-26','hamster','29919208'),
+('6140','Gina','2018-08-23','pig','54053967'),
+('7235','Leonard','2014-02-17','rabbit','56182137'),
+('7394','Ernestine','2012-03-28','tortoise','30429965'),
+('8047','Easton','2017-01-04','pig','44486101'),
+('8426','Toney','2019-01-08','hamster','63569092'),
+('8540','Tressie','2016-06-29','cat','33663740'),
+('9229','Carli','2013-09-02','dog','57063930'),
+('9720','Mariela','2012-11-05','hamster','58058856'),
+('9913','Brendan','2020-04-25','cat','64993129');
+
+DROP TABLE IF EXISTS `appointments`;
+CREATE TABLE `appointments` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `expected_date` datetime NOT NULL,
+  `petID` varchar(20) NOT NULL,
+  `doctorID` varchar(10) NOT NULL,
+  `status` char(20) NOT NULL,
+  PRIMARY KEY (`ID`), 
+  KEY `medic1` (`petID`),
+  KEY `medic2` (`doctorID`),
+  CONSTRAINT `medic1` FOREIGN KEY (`petID`) REFERENCES `pets` (`petID`) ON UPDATE CASCADE,
+  CONSTRAINT `medic2` FOREIGN KEY (`doctorID`) REFERENCES `doctors` (`doctorID`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `appointments` (`ID`, `expected_date`, `petID`, `doctorID`, `status`) VALUES 
+(1,'2019-07-11 12:00:00','0480','8150','finished'),
+(2,'2019-12-02 03:00:00','8426','5341','finished'),
+(3,'2019-11-27 02:30:00','0416','8150','finished'),
+(4,'2019-02-06 07:30:00','8047','4047','finished'),
+(5,'2019-02-13 06:45:00','5017','5341','finished'),
+(6,'2019-12-13 02:45:00','0480','4047','finished'),
+(7,'2019-11-26 12:00:00','8540','8150','finished'),
+(8,'2020-10-26 13:00:00','0983','4123','finished'),
+(9,'2019-09-01 02:45:00','5642','4047','finished'),
+(10,'2019-11-27 08:30:00','6140','1077','finished'),
+(11,'2019-10-23 09:00:00','5405','4047','finished'),
+(12,'2019-06-15 11:30:00','6140','5341','finished'),
+(13,'2019-09-02 03:00:00','4599','4123','finished'),
+(14,'2019-07-15 01:30:00','2777','5341','finished'),
+(15,'2019-12-30 12:30:00','5642','4123','finished'),
+(16,'2019-07-15 05:30:00','8047','4047','finished'),
+(17,'2019-08-12 11:45:00','7394','4047','finished'),
+(18,'2019-05-23 02:30:00','5734','8150','finished'),
+(19,'2019-02-15 11:30:00','0416','1077','finished'),
+(20,'2019-10-27 07:30:00','2260','4047','finished'),
+(21,'2019-07-16 07:45:00','5310','4047','finished'),
+(22,'2019-03-12 05:30:00','5642','8150','finished'),
+(23,'2019-06-16 12:45:00','5355','4047','finished'),
+(24,'2019-01-18 02:30:00','7394','8150','finished'),
+(25,'2019-12-26 07:15:00','8426','5341','finished'),
+(26,'2019-12-16 02:45:00','5355','1077','finished'),
+(27,'2019-02-09 10:30:00','2479','8150','canceled'),
+(28,'2019-01-25 01:45:00','6140','4047','finished'),
+(29,'2019-04-09 05:30:00','0480','4047','canceled'),
+(30,'2019-06-16 12:45:00','8540','1077','finished'),
+(31,'2020-01-19 17:45:00','0983','4123','canceled'),
+(32,'2019-09-07 07:45:00','1035','8150','finished'),
+(33,'2019-07-17 12:30:00','5734','4047','finished'),
+(34,'2019-07-26 09:00:00','5642','8150','finished'),
+(35,'2021-03-13 20:45:00','2448','8150','finished'),
+(36,'2019-03-01 05:45:00','1071','1077','finished'),
+(37,'2019-01-12 04:30:00','2479','5341','finished'),
+(38,'2020-12-01 09:45:00','5405','4047','finished'),
+(39,'2019-02-07 02:45:00','6140','5341','finished'),
+(40,'2019-08-14 03:15:00','4507','5341','canceled'),
+(41,'2020-12-01 20:45:00','0433','4123','finished'),
+(42,'2021-06-01 20:45:00','0900','4123','pending'),
+(43,'2021-05-02 12:00:00','1960','4123','pending'),
+(44,'2021-05-23 12:00:00','2969','1077','pending'),
+(45,'2021-05-23 08:30:00','3659','1077','pending'),
+(46,'2021-03-10 17:45:00','4009','8150','finished'),
+(47,'2020-09-02 10:00:00','5128','4123','finished'),
+(48,'2020-09-02 15:30:00','5391','4047','finished'),
+(49,'2020-04-12 10:30:00','5800','5341','finished'),
+(50,'2020-05-12 10:30:00','7235','1077','finished'),
+(51,'2020-10-07 10:45:00','9229','1077','finished'),
+(52,'2020-10-08 09:00:00','9720','1077','finished'),
+(53,'2020-10-08 09:00:00','9913','4123','finished');

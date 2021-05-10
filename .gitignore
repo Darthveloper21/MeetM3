@@ -1,0 +1,7 @@
+.idea
+*.pyc
+test_tmp.py
+test_tmp1.py
+*.spec
+build
+*.exe
