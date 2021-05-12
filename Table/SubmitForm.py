@@ -32,7 +32,7 @@ def checkMail(email):
 
 def checkNumeric(numeric):
     regex = '^[0-9]+$'
-    if re.search(regex, numeric):
+    if re.search(regex, str(numeric)):
         return True
     else:
         return False
@@ -168,6 +168,8 @@ class SubmitForm:
                 # self.attvars[i] = StringVar().set(doctor[0])
 
     def submit(self):
+        key = self.table.getSelectedKeys()[0]
+
         lenAtt = len(self.attributes)
         if self.table_type == 'appointment':
             lenAtt -= 1
@@ -202,7 +204,7 @@ class SubmitForm:
                 messagebox.showerror('Error', 'Email field must follow email format')
                 return
         else:
-            if normalPet(self.attvars[0].get()) is None:
+            if checkNumeric(self.attvars[0].get()) is None:
                 messagebox.showerror('Error', 'Pet ID must be a numeric value')
                 return
             if checkDate(self.attvars[2].get()) is False:
@@ -214,14 +216,15 @@ class SubmitForm:
 
         if self.action == 'update':
             if self.table_type == 'appointment':
-                updateAppointment(self.attvars[0].get(), self.attvars[1].get(),
-                                  self.attvars[2].get(), self.statusBox.get())
+                updateAppointment(key, new_date=self.attvars[0].get(), new_pet_id=self.attvars[1].get(),
+                                  new_doctor_id=self.attvars[2].get(), new_status=self.statusBox.get())
             elif self.table_type == 'owner':
-                updateOwner(self.attvars[0].get(), self.attvars[1].get(), self.attvars[2].get(), self.attvars[3].get(),
+                updateOwner(key, new_ssn=self.attvars[0].get(), fname=self.attvars[1].get(),
+                            lname=self.attvars[2].get(), dob=self.attvars[3].get(),
                             pnum=self.attvars[4].get(), email=self.attvars[5].get())
             elif self.table_type == 'pet':
-                updatePet(self.attvars[0].get(), self.attvars[1].get(), self.attvars[2].get(),
-                          self.attvars[3].get(), self.attvars[4].get())
+                updatePet(key, pet_id=self.attvars[0].get(), pet_name=self.attvars[1].get(), dob=self.attvars[2].get(),
+                          self.attvars[3].get(), owner_ssn=self.attvars[4].get())
             else:
                 updateDoctor(self.attvars[0].get(), self.attvars[1].get(), self.attvars[2].get(), self.attvars[3].get(),
                              pnum=self.attvars[4].get(), email=self.attvars[5].get())
@@ -234,7 +237,8 @@ class SubmitForm:
                 addOwner(self.attvars[0].get(), self.attvars[1].get(), self.attvars[2].get(), self.attvars[3].get(),
                          pnum=self.attvars[4].get(), email=self.attvars[5].get())
             elif self.table_type == 'pet':
-                addPet(self.attvars[0].get(), self.attvars[1].get(), self.attvars[2].get(), self.attvars[3].get())
+                addPet(self.attvars[0].get(), self.attvars[1].get(), self.attvars[2].get(),
+                       self.attvars[3].get(), self.attvars[4].get())
             else:
                 addDoctor(self.attvars[0].get(), self.attvars[1].get(), self.attvars[2].get(), self.attvars[3].get(),
                           pnum=self.attvars[4].get(), email=self.attvars[5].get())

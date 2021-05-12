@@ -32,10 +32,10 @@ def addOwner(ssn, fname, lname, dob, pnum=None, email=None):
     mydb.commit()
 
 
-def addPet(name, dob, pet_type, owner_ssn):
+def addPet(pet_id, name, dob, pet_type, owner_ssn):
     global mydb
     global cursor
-    petTuple = (name, dob, pet_type, owner_ssn)
+    petTuple = (pet_id, name, dob, pet_type, owner_ssn)
 
     sqlLine = 'SELECT * FROM owners WHERE SSN = ' + str(owner_ssn)
     cursor.execute(sqlLine)
@@ -44,8 +44,8 @@ def addPet(name, dob, pet_type, owner_ssn):
         print("No owner SSN found")
         return False
 
-    sqlLine = 'INSERT INTO pets(pet_name, date_of_birth, pet_type, owner_SSN) ' \
-              'VALUES (%s, %s, %s, %s)'
+    sqlLine = 'INSERT INTO pets(petID, pet_name, date_of_birth, pet_type, owner_SSN) ' \
+              'VALUES (%s, %s, %s, %s, %s)'
 
     cursor.execute(sqlLine, petTuple)
     mydb.commit()
@@ -106,7 +106,7 @@ def updateOwner(owner_ssn, new_ssn=None, fname=None, lname=None, dob=None, pnum=
     tmp = cursor.next()
 
     for x in range(0, 6):
-        if ownerList[x] is None:
+        if ownerList[x] is None or ownerList[x] == '':
             ownerList[x] = str(tmp[x])
 
     sqlLine = 'UPDATE owners SET ' \
@@ -134,7 +134,8 @@ def updatePet(pet_id, pet_name=None, dob=None, pet_type=None, owner_ssn=None):
     tmp = cursor.next()
 
     for x in range(0, 4):
-        if petList[x] is None:
+        if petList[x] is None or petList[x] == \
+                '':
             petList[x] = str(tmp[x])
 
     sqlLine = 'UPDATE pets SET ' \
@@ -155,7 +156,7 @@ def updateDoctor(doctor_id, new_id=None, fname=None, lname=None, dob=None, pnum=
     tmp = cursor.next()
 
     for x in range(0, 6):
-        if doctorList[x] is None:
+        if doctorList[x] is None or doctorList[x] == '':
             doctorList[x] = str(tmp[x])
 
     sqlLine = 'UPDATE doctors SET ' \
@@ -188,16 +189,16 @@ def updateAppointment(appointment_id, new_date=None, new_pet_id=None, new_doctor
     cursor.execute(sqlLine)
     tmp = cursor.next()
 
-    if new_date is None:
+    if new_date is None or new_date == '':
         new_date = tmp[0]
 
-    if new_pet_id is None:
+    if new_pet_id is None or new_pet_id == '':
         new_pet_id = tmp[1]
 
-    if new_doctor_id is None:
+    if new_doctor_id is None or new_doctor_id == '':
         new_doctor_id = tmp[2]
 
-    if new_status is None:
+    if new_status is None or new_status == '':
         new_status = tmp[3]
 
     sqlLine = 'UPDATE appointments SET ' \
