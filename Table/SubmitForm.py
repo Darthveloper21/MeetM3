@@ -168,8 +168,6 @@ class SubmitForm:
                 # self.attvars[i] = StringVar().set(doctor[0])
 
     def submit(self):
-        key = self.table.getSelectedKeys()[0]
-
         lenAtt = len(self.attributes)
         if self.table_type == 'appointment':
             lenAtt -= 1
@@ -215,6 +213,7 @@ class SubmitForm:
                 return
 
         if self.action == 'update':
+            key = self.table.getSelectedKeys()[0]
             if self.table_type == 'appointment':
                 updateAppointment(key, new_date=self.attvars[0].get(), new_pet_id=self.attvars[1].get(),
                                   new_doctor_id=self.attvars[2].get(), new_status=self.statusBox.get())
@@ -223,10 +222,12 @@ class SubmitForm:
                             lname=self.attvars[2].get(), dob=self.attvars[3].get(),
                             pnum=self.attvars[4].get(), email=self.attvars[5].get())
             elif self.table_type == 'pet':
-                updatePet(key, pet_id=self.attvars[0].get(), pet_name=self.attvars[1].get(), dob=self.attvars[2].get(),
-                          self.attvars[3].get(), owner_ssn=self.attvars[4].get())
+                updatePet(key, new_id=self.attvars[0].get(), new_name=self.attvars[1].get(),
+                          new_dob=self.attvars[2].get(), new_type=self.attvars[3].get(),
+                          new_owner=self.attvars[4].get())
             else:
-                updateDoctor(self.attvars[0].get(), self.attvars[1].get(), self.attvars[2].get(), self.attvars[3].get(),
+                updateDoctor(key, new_id=self.attvars[0].get(), fname=self.attvars[1].get(),
+                             lname=self.attvars[2].get(), dob=self.attvars[3].get(),
                              pnum=self.attvars[4].get(), email=self.attvars[5].get())
 
         if self.action == 'add':

@@ -117,10 +117,10 @@ def updateOwner(owner_ssn, new_ssn=None, fname=None, lname=None, dob=None, pnum=
     mydb.commit()
 
 
-def updatePet(pet_id, pet_name=None, dob=None, pet_type=None, owner_ssn=None):
+def updatePet(pet_id, new_id=None, new_name=None, new_dob=None, new_type=None, new_owner=None):
     global mydb
     global cursor
-    petList = [pet_name, dob, pet_type, owner_ssn]
+    petList = [new_id, new_name, new_dob, new_type, new_owner]
 
     sqlLine = 'SELECT * FROM pets WHERE petID = ' + str(pet_id)
     cursor.execute(sqlLine)
@@ -129,17 +129,16 @@ def updatePet(pet_id, pet_name=None, dob=None, pet_type=None, owner_ssn=None):
         print("No petID found")
         return False
 
-    sqlLine = 'SELECT pet_name, date_of_birth, pet_type, owner_SSN FROM pets WHERE petID = ' + str(pet_id)
+    sqlLine = 'SELECT petID, pet_name, date_of_birth, pet_type, owner_SSN FROM pets WHERE petID = ' + str(pet_id)
     cursor.execute(sqlLine)
     tmp = cursor.next()
 
-    for x in range(0, 4):
-        if petList[x] is None or petList[x] == \
-                '':
+    for x in range(0, 5):
+        if petList[x] is None or petList[x] == '':
             petList[x] = str(tmp[x])
 
     sqlLine = 'UPDATE pets SET ' \
-              'pet_name = %s, date_of_birth = %s, pet_type = %s, owner_SSN = %s ' \
+              'petID = %s, pet_name = %s, date_of_birth = %s, pet_type = %s, owner_SSN = %s ' \
               'WHERE petID = ' + str(pet_id)
 
     cursor.execute(sqlLine, petList)
