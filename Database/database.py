@@ -289,13 +289,16 @@ def getPets(offset, limit, name=None, pet_id=None):
     else:
         pet_id = 'petID '
 
-    sqlLine = 'SELECT * FROM pets WHERE (pet_name LIKE ' + '\'' + name + '%\' ' \
-              'OR pet_type LIKE ' + '\'' + name + '%\') AND ' + str(pet_id) + \
+    sqlLine = 'SELECT p.*, CONCAT(o.fname, " ", o.lname) AS "owner name" FROM pets p ' \
+              'LEFT JOIN owners o ON p.owner_SSN = o.SSN ' \
+              'WHERE (p.pet_name LIKE ' + '\'' + name + '%\' ' \
+              'OR p.pet_type LIKE ' + '\'' + name + '%\' ' \
+              'OR CONCAT(o.fname, " ", o.lname) like \'%' + name + '%\') AND ' + str(pet_id) + \
               'LIMIT ' + str(offset) + ', ' + str(limit)
 
     cursor.execute(sqlLine)
     result = cursor.fetchall()
-    pets = pd.DataFrame(result, columns=["Pet ID", "Pet name", "Date of birth", "Pet Type", "Owner SSN"])
+    pets = pd.DataFrame(result, columns=["Pet ID", "Pet name", "Date of birth", "Pet Type", "Owner SSN", "Owner Name"])
 
     return pets
 

@@ -68,7 +68,7 @@ doctorButton.grid(row=3, column=0, pady=2)
 
 appointmentWindow = TableWindow(window, "Appointments", 1040, 310)
 ownerWindow = TableWindow(window, "Owners", 840, 310)
-petWindow = TableWindow(window, "Pets", 620, 310)
+petWindow = TableWindow(window, "Pets", 760, 310)
 doctorWindow = TableWindow(window, "Doctors", 860, 310)
 
 appointmentTable = AppointmentsTable(appointmentWindow.window, 0, 10, 10, 40)

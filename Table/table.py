@@ -222,8 +222,8 @@ class PetsTable(Table):
 
     def __init__(self, root, offset, limit, px=None, py=None):
         self.offset = offset
-        widths = [10, 20, 15, 10, 20]
-        justifies = [CENTER, LEFT, LEFT, LEFT, CENTER]
+        widths = [10, 20, 15, 10, 20, 20]
+        justifies = [CENTER, LEFT, LEFT, LEFT, CENTER, LEFT]
         pets = getPets(offset, limit)
         self.full_size = len(getPets(0, 1000).index)
         super().__init__(root, pets, widths, justifies, px, py)
