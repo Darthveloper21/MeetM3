@@ -2,11 +2,11 @@
 
 ## Table of contents
 - [MeetM3](#MeetM3)
-- [Description](#Description)
-- [Prerequisites](#Prerequisites)
-- [How to comple and run](#How-to-comple-and-run)
-- [Screen shot](#Screen-shot)
-- [Credit](#Credit)
+    - [Description](#Description)
+    - [Prerequisites](#Prerequisites)
+    - [How to comple and run](#How-to-comple-and-run)
+    - [Screen shot](#Screen-shot)
+    - [Credit](#Credit)
 
 ## Description
 - Database class project for bonus score
