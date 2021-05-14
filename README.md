@@ -1,18 +1,26 @@
 # MeetM3
 
+## Table of contents
+- [MeetM3](#MeetM3)
+- [Description](#Description)
+- [Prerequisites](#Prerequisites)
+- [How to comple and run](#How-to-comple-and-run)
+- [Screen shot](#Screen-shot)
+- [Credit](#Credit)
+
 ## Description
 - Database class project for bonus score
 - Medical examination scheduling software for veterinary clinic. 
 - This is a database application, helping veterinary clinic to organize appointments with customers and patients (pet). 
 - The application stores information/data about customers, who are pet owners and their pets, and schedules appointments between doctors and customers.
 
-## Prerequisite 
+## Prerequisites
 - Python 3.7 (or Python 3.6)
 - Tkinter
 - Pandas
 - mysql-connector-python
 
-### Prerequisite Installation
+### Installing Prerequisite
 - Install [Python 3.7](https://www.python.org/downloads/release/python-379/)
 - Download Pip for python: https://pip.pypa.io/en/stable/installing/
 - Download [MySQL server](https://dev.mysql.com/downloads/mysql/) or you can use [XAMPP](https://dev.mysql.com/downloads/mysql/) instead. Google for more information about MySQL server setup.
@@ -42,9 +50,9 @@
 
 ## Screen shot
 
-![Main Window](./Screenshots/main_window.bmp)
-![Table window](./Screenshots/appointments.bmp)
-![Submit form](./Screenshots/submit_form.bmp)
+![Main Window](./Screenshot/main_window.bmp)
+![Table window](./Screenshot/appointments.bmp)
+![Submit form](./Screenshot/submit_form.bmp)
 
 ## Credit
 - Made by [***@Darthveloper21***](https://github.com/Darthveloper21).
