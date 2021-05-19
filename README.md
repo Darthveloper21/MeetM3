@@ -29,9 +29,6 @@
     > pip install pandas </br>
     > pip install mysql-connector-python </br>
 
-### Virtual environment
-- I would recommend using [Pycharm](https://www.jetbrains.com/pycharm/download/#section=windows) and [Conda](https://conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda) to create a virtual environment, google it for more information and detailed installation.
-
 ## How to comple and run
 - First, clone/download this repository for source code.
 
