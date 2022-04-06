@@ -10,7 +10,7 @@
 
 ## Description
 - Database class project for bonus score
-- Medical examination scheduling software for veterinary clinic. 
+- Medical examination scheduling program for veterinary clinic. 
 - This is a database application, helping veterinary clinic to organize appointments with customers and patients (pet). 
 - The application stores information/data about customers, who are pet owners and their pets, and schedules appointments between doctors and customers.
 
